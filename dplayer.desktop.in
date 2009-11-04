@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=DPlayer
+Exec=dplayer
+Icon=dplayer.png
+Terminal=false
+Type=Application
+Categories=Application;Desktop;AudioVideo;Multimedia;
+StartupNotify=true
