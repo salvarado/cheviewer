@@ -19,28 +19,20 @@ typedef struct CoreData_ CoreData;
 #define VIDEOSINK_TVOUT_LEFT 0
 #define VIDEOSINK_TVOUT_WIDTH 320
 #define VIDEOSINK_TVOUT_HEIGHT 240
-#define USE_OMX
+
+#undef USE_GSTOMX
 
 /**
  * Holds core data (gstreamer stuff).
  */
 struct CoreData_
 {
-	GstElement *pipeline; /**< The main pipeline. */
-	GstElement *filesrc; /**< The source element. */
-	GstElement *demuxer; /**< The demuxer element*/
-	GstElement *videoqueue; /**< The video queue element. */
-	GstElement *audioqueue; /**< The audio queue element. */
-	GstElement *videodecoder; /**< The video decoder element. */
-/* Colorspace no needed with OMX*/
-#ifndef USE_OMX
-        GstElement *videocolorspace; /**< The video colorspace element. */
-
-#endif
-	GstElement *audiodecoder; /**< The audio decoder element. */
-	GstElement *videosink; /**< The video sink element. */
-	GstElement *audiosink; /**< The audio sink element. */
-        gboolean lcdfullscreen; /**< TRUE if doing playback in fullscreen*/
+    GstElement *pipeline; /**< The main pipeline. */
+    GstElement *filesrc; /**< The source element. */
+    GstElement *decoder; /**< The image decoder element. */
+    GstElement *videocolorspace; /**< The video colorspace element. */
+    GstElement *imagesink; /**< The image sink element. */
+    gboolean lcdfullscreen; /**< TRUE if doing playback in fullscreen*/
 };
 
 /**

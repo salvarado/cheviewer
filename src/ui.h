@@ -1,5 +1,12 @@
-#ifndef __UI_H_
-#define __UI_H_
+/*
+ * ui.h
+ *
+ *  Created on: Nov 3, 2009
+ *      Author: x0095969
+ */
+
+#ifndef UI_H_
+#define UI_H_
 
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
@@ -14,7 +21,6 @@
 typedef struct UiData_ UiData;
 
 #include "app.h"
-
 #include "omx_area.h"
 
 /**
@@ -22,32 +28,46 @@ typedef struct UiData_ UiData;
  */
 struct UiData_
 {
-	GtkWidget *file_selector; /**< The file selection dialog widget. */
-	OmxArea *omx_area;
-        GtkWidget *stop_button;
-        GtkWidget *play_button;
-        GtkWidget *fileopen_button;
-        GtkWidget *lcdout_radio;
-        GtkWidget *tvout_radio;
-        GtkWidget *fullscreen_check;
+    /*common*/
+    OmxArea *omx_area;
+    GtkWidget *file_selector; /**< The file selection dialog widget. */
+    GtkWidget *slideshow_button;
+    GtkWidget *delete_button;
+    GtkWidget *thumbnails_button;
+    /*window1*/
+    GtkWidget *fileopen_button;
+    GtkWidget *options_button;
+    GtkWidget *iconview;
+    GtkWidget *scrolledwindow1;
+    GtkListStore  *list_store;
+    GtkWidget *window1;
+
+    /*window3*/
+    GtkWidget *rright_button;
+    GtkWidget *rleft_button;
+    GtkWidget *zoomin_button;
+    GtkWidget *zoomout_button;
+    GtkWidget *back_button;
+    GtkWidget *fordward_button;
 
 };
 
 /**
  * Creates the UI.
- * 
+ *
  * @param app_data The application data.
- * 
+ *
  * @return The UI data.
  */
 UiData *ui_data_new (AppData *app_data);
 
 /**
  * Destroys the UI.
- * 
+ *
  * @param ui_data The UI data.
  */
 void ui_data_destroy (UiData *ui_data);
 
 
-#endif /* __UI_H_ */
+#endif /* UI_H_ */
+

@@ -2,6 +2,7 @@
 #define __SHARED_H_
 
 #include <glib.h>
+#include <gtk/gtk.h>
 
 typedef struct SharedData_ SharedData;
 
@@ -14,6 +15,7 @@ typedef struct SharedData_ SharedData;
 struct SharedData_
 {
     int filler;
+    void *thumbnail;
 };
 
 

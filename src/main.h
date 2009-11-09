@@ -1,7 +1,12 @@
 #ifndef __MAIN_H_
 #define __MAIN_H_
 
-/* #define TEST */
-/* #define TEST_FILE "/home/felipec/dev/tests/white pony.png" */
+
+#include <gtk/gtk.h>
+#include <gst/gst.h>
+
+#include "app.h"
+
+void fill_model ( AppData *app_data);
 
 #endif /* __MAIN_H */

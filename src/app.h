@@ -12,9 +12,9 @@ typedef struct AppData_ AppData;
  */
 struct AppData_
 {
-	CoreData *core_data; /**< The core data. */
-	SharedData *shared_data; /**< The shared data. */
-	UiData *ui_data; /**< The UI data. */
+    CoreData *core_data; /**< The core data. */
+    SharedData *shared_data; /**< The shared data. */
+    UiData *ui_data; /**< The UI data. */
 };
 
 /**

@@ -13,25 +13,25 @@ typedef struct _OmxAreaClass OmxAreaClass;
 
 struct _OmxArea
 {
-	GtkDrawingArea parent_object;
+    GtkDrawingArea parent_object;
 
-	GObject *listener; /**< The object that listens to the widget's status changes. */
+    GObject *listener; /**< The object that listens to the widget's status changes. */
 
-	gint win_x; /**< The window's x position. */
-	gint win_y; /**< The window's y position. */
-	gint wid_x; /**< The widget's x position. */
-	gint wid_y; /**< The widget's y position. */
-	gint wid_width; /**< The widget's width. */
-	gint wid_height; /**< The widget's height. */
-	GdkPixmap *pixmap; /**< The widget's pixmap. */
-	gint pp_width;
-	gint pp_height;
+    gint win_x; /**< The window's x position. */
+    gint win_y; /**< The window's y position. */
+    gint wid_x; /**< The widget's x position. */
+    gint wid_y; /**< The widget's y position. */
+    gint wid_width; /**< The widget's width. */
+    gint wid_height; /**< The widget's height. */
+    GdkPixmap *pixmap; /**< The widget's pixmap. */
+    gint pp_width;
+    gint pp_height;
 
 };
 
 struct _OmxAreaClass
 {
-	GtkDrawingAreaClass parent_class;
+    GtkDrawingAreaClass parent_class;
 };
 
 /**
