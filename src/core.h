@@ -31,6 +31,8 @@ struct CoreData_
     GstElement *filesrc; /**< The source element. */
     GstElement *decoder; /**< The image decoder element. */
     GstElement *videocolorspace; /**< The video colorspace element. */
+    GstElement *vscale; /**< The video scale element. */
+    GstElement *filter; /**< The caps to scale element. */
     GstElement *imagesink; /**< The image sink element. */
     gboolean lcdfullscreen; /**< TRUE if doing playback in fullscreen*/
 };

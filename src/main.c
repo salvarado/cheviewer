@@ -16,33 +16,14 @@ fill_model (AppData *app_data)
 {
     GtkTreeIter    iter;
     GdkPixbuf *icon;
-    GdkPixbuf *image;
     GError *err = NULL;
-    gboolean valid;
 
-    g_print ("fill_model : ENTER \n");
-
-    chdir("/data/cheviewer-0.1/images");
-
-        g_print ("DAL_134.jpg \n");
-        image = gdk_pixbuf_new_from_file("DAL_134.jpg", &err);
-        assert(err==NULL);
-
-        gtk_list_store_append(app_data->ui_data->list_store, &(iter));
-        gtk_list_store_set(app_data->ui_data->list_store, &(iter), COL_DISPLAY_NAME,
-            "desktop", COL_PIXBUF, image, -1);
-
-        valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (app_data->ui_data->list_store), &iter);
-
-        g_print ("app_data->shared_data->thumbnail \n");
         icon = app_data->shared_data->thumbnail;
 
         gtk_list_store_append(app_data->ui_data->list_store, &(iter));
         gtk_list_store_set(app_data->ui_data->list_store, &(iter), COL_DISPLAY_NAME,
                   "OK", COL_PIXBUF, icon, -1);
 
-
-    g_print ("fill_model : EXIT \n");
 }
 
 static GtkWidget *
@@ -82,17 +63,13 @@ main (int argc, char *argv[])
     const gchar *filename;
     AppData *app_data;
 
-    /*
-     g_thread_init (NULL);
-     gtk_init (&argc, &argv);
-     gdk_threads_init ();
-     gst_init (&argc, &argv);
-    */
-
     /* Initialize gstreamer. */
+    g_thread_init (NULL);
     gst_init (&argc, &argv);
 
+
     /* Initialize GTK+. */
+    gdk_threads_init ();
     gtk_init (&argc, &argv);
 
     /* Create the app. */

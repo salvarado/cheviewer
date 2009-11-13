@@ -1,6 +1,8 @@
 #include "main.h"
 #include "core.h"
 
+#include <string.h>
+
 static void cb_newpad (GstElement *element, GstPad *pad, gpointer cb_data);
 static gboolean cb_gstbus (GstBus *bus, GstMessage *message, gpointer data);
 void core_data_enable_lcdfullscreen (AppData * app_data);
@@ -35,6 +37,10 @@ core_data_new (AppData *app_data)
             gst_element_factory_make ("jpegdec", "decoder");
     core_data->videocolorspace =
             gst_element_factory_make ("ffmpegcolorspace", "videocolorspace");
+    core_data->vscale =
+                gst_element_factory_make ("videoscale", "videoscale");
+    core_data->filter =
+                    gst_element_factory_make ("capsfilter", "filter");
     core_data->imagesink =
                 gst_element_factory_make ("gdkpixbufsink", "imagesink");
 
@@ -44,9 +50,21 @@ core_data_new (AppData *app_data)
     gst_bin_add (bin, core_data->filesrc);
     gst_bin_add (bin, core_data->decoder);
     gst_bin_add (bin, core_data->videocolorspace);
+    gst_bin_add (bin, core_data->vscale);
+    gst_bin_add (bin, core_data->filter);
     gst_bin_add (bin, core_data->imagesink);
 
-    gst_element_link_many (core_data->filesrc, core_data->decoder, core_data->videocolorspace, core_data->imagesink, NULL);
+    gst_element_link_many (core_data->filesrc, core_data->decoder, core_data->videocolorspace,
+            core_data->vscale, core_data->filter, core_data->imagesink, NULL);
+
+    /*setting properties*/
+    g_object_set (core_data->vscale, "method", 1, NULL);
+    g_object_set (core_data->filter, "caps",
+            gst_caps_new_simple ("video/x-raw-rgb",
+                    "width", G_TYPE_INT, 128,
+                    "height", G_TYPE_INT, 96,
+                    NULL),
+            NULL);
 
     gst_element_set_state (core_data->pipeline, GST_STATE_NULL);
 
@@ -60,9 +78,10 @@ static gboolean
 cb_gstbus (GstBus *bus, GstMessage *message, gpointer cb_data)
 {
     AppData *app_data;
+
     app_data = cb_data;
 
-    g_print ("msg type: [%d]\n", GST_MESSAGE_TYPE (message));
+
     switch (GST_MESSAGE_TYPE (message))
     {
         case GST_MESSAGE_ERROR:
@@ -85,18 +104,24 @@ cb_gstbus (GstBus *bus, GstMessage *message, gpointer cb_data)
         }
         case GST_MESSAGE_ELEMENT:
         {
+            /*Waiting for a message "pixbuf" from gdkpixbufsink */
             if ( message->src == GST_OBJECT(app_data->core_data->imagesink))
             {
-                g_print ("GST_MESSAGE_ELEMENT: [%d]\n", GST_MESSAGE_TYPE (message));
+                if (message->structure != NULL)
+                {
+                    GstStructure *s;
+                    s = message->structure;
+                    if( strcmp(gst_structure_get_name (s), "pixbuf")== 0 )
+                    {
+                        /*Getting the pixbuf from gdkpixbufsink*/
+                        g_object_get (G_OBJECT (app_data->core_data->imagesink),
+                                "last-pixbuf", &(app_data->shared_data->thumbnail), NULL);
 
-                g_object_get (G_OBJECT (app_data->core_data->imagesink),
-                                    "last-pixbuf", &(app_data->shared_data->thumbnail), NULL);
+                        /*Fill the icon tree to iconview*/
+                        fill_model (app_data);
 
-                g_print ("GST_MESSAGE_ELEMENT:after g_object_get \n");
-
-                fill_model (app_data);
-
-                g_print ("GST_MESSAGE_ELEMENT:fill model \n");
+                    }
+                }
             }
         }
         default:

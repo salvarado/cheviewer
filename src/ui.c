@@ -104,7 +104,7 @@ ui_data_new (AppData *app_data)
 
     /* Make a hbox to put the buttons and scrolledwindow in. */
     main_hbox1 = gtk_hbox_new (FALSE, 0);
-    gtk_container_set_border_width (GTK_CONTAINER (main_hbox1), 1); /*Verificar si esto es necesario*/
+    gtk_container_set_border_width (GTK_CONTAINER (main_hbox1), 1);
     gtk_container_add (GTK_CONTAINER (ui_data->window1), main_hbox1);
 
     /* Make a vbox1 to put the buttons in. */
@@ -142,7 +142,6 @@ ui_data_new (AppData *app_data)
     /*Make a scrolledwindow*/
 
     ui_data->scrolledwindow1 = gtk_scrolled_window_new (NULL, NULL);
-    /*gtk_box_pack_start (GTK_BOX (main_hbox1), scrolledwindow1, TRUE, TRUE, 1);*/
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (ui_data->scrolledwindow1), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
     gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(ui_data->scrolledwindow1),GTK_SHADOW_IN);
 
