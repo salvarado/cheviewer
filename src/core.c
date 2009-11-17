@@ -5,7 +5,6 @@
 
 static void cb_newpad (GstElement *element, GstPad *pad, gpointer cb_data);
 static gboolean cb_gstbus (GstBus *bus, GstMessage *message, gpointer data);
-void core_data_enable_lcdfullscreen (AppData * app_data);
 
 CoreData *
 core_data_new (AppData *app_data)
@@ -100,7 +99,7 @@ cb_gstbus (GstBus *bus, GstMessage *message, gpointer cb_data)
             gst_element_unlink (app_data->core_data->videocolorspace,
                     app_data->core_data->imagesink);
             gst_element_set_state (app_data->core_data->pipeline,
-                GST_STATE_NULL);
+                GST_STATE_READY);
         }
         case GST_MESSAGE_ELEMENT:
         {
@@ -214,9 +213,13 @@ core_data_destroy (CoreData *core_data)
 void
 core_data_open_file (CoreData *core_data, const gchar *filename)
 {
-    gst_element_set_state (core_data->pipeline, GST_STATE_NULL);
+    g_printf("\n OPEN FILE: %s\n", filename );
+
     g_object_set (G_OBJECT (core_data->filesrc), "location",
             filename, NULL);
+    g_printf("\n OPEN FILE  2: %s\n", filename );
+
+    gst_element_set_state (core_data->pipeline, GST_STATE_READY);
 }
 
 int

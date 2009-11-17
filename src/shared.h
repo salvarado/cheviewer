@@ -3,6 +3,7 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <dirent.h>
 
 
 
@@ -17,6 +18,13 @@ struct SharedData_
 {
     int filler;
     void *thumbnail;
+
+    DIR     *name_dir;
+    struct dirent   *st_dir;
+    gint   index;
+    GArray *file_names;
+    gchar * path;
+    gchar *image_name;
 };
 
 

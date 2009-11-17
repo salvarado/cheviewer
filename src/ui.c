@@ -187,6 +187,8 @@ cb_file_ok_sel (GtkWidget *w, gpointer cb_data)
     filename = gtk_file_selection_get_filename (
             GTK_FILE_SELECTION (app_data->ui_data->file_selector));
 
+    g_print ("FIlename : % s \n", filename);
+
     /*core_data_open_file (app_data->core_data, filename);*/
 
     gtk_widget_destroy (app_data->ui_data->file_selector);

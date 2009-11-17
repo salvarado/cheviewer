@@ -33,7 +33,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = dplayer$(EXEEXT)
+bin_PROGRAMS = cheviewer$(EXEEXT)
 subdir = src
 DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -47,15 +47,16 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_dplayer_OBJECTS = dplayer-app.$(OBJEXT) dplayer-core.$(OBJEXT) \
-	dplayer-main.$(OBJEXT) dplayer-ui.$(OBJEXT) \
-	dplayer-shared.$(OBJEXT) dplayer-omx_area.$(OBJEXT)
-dplayer_OBJECTS = $(am_dplayer_OBJECTS)
+am_cheviewer_OBJECTS = cheviewer-app.$(OBJEXT) \
+	cheviewer-core.$(OBJEXT) cheviewer-main.$(OBJEXT) \
+	cheviewer-ui.$(OBJEXT) cheviewer-shared.$(OBJEXT) \
+	cheviewer-omx_area.$(OBJEXT)
+cheviewer_OBJECTS = $(am_cheviewer_OBJECTS)
 am__DEPENDENCIES_1 =
-dplayer_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
-dplayer_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
-	--mode=link $(CCLD) $(dplayer_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
-	$(LDFLAGS) -o $@
+cheviewer_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+cheviewer_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(cheviewer_CFLAGS) \
+	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -68,8 +69,8 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(dplayer_SOURCES)
-DIST_SOURCES = $(dplayer_SOURCES)
+SOURCES = $(cheviewer_SOURCES)
+DIST_SOURCES = $(cheviewer_SOURCES)
 HEADERS = $(noinst_HEADERS)
 ETAGS = etags
 CTAGS = ctags
@@ -194,9 +195,9 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-dplayer_SOURCES = app.c core.c main.c ui.c shared.c omx_area.c
-dplayer_CFLAGS = $(GST_CFLAGS) $(GTK_CFLAGS)
-dplayer_LDADD = $(GST_LIBS) $(GTK_LIBS)
+cheviewer_SOURCES = app.c core.c main.c ui.c shared.c omx_area.c
+cheviewer_CFLAGS = $(GST_CFLAGS) $(GTK_CFLAGS)
+cheviewer_LDADD = $(GST_LIBS) $(GTK_LIBS)
 AM_CFLAGS = -g3 $(GST_FLAGS) $(GTK_CFLAGS)
 noinst_HEADERS = app.h core.h main.h ui.h shared.h omx_area.h
 all: all-am
@@ -260,9 +261,9 @@ clean-binPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
-dplayer$(EXEEXT): $(dplayer_OBJECTS) $(dplayer_DEPENDENCIES) 
-	@rm -f dplayer$(EXEEXT)
-	$(dplayer_LINK) $(dplayer_OBJECTS) $(dplayer_LDADD) $(LIBS)
+cheviewer$(EXEEXT): $(cheviewer_OBJECTS) $(cheviewer_DEPENDENCIES) 
+	@rm -f cheviewer$(EXEEXT)
+	$(cheviewer_LINK) $(cheviewer_OBJECTS) $(cheviewer_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -270,12 +271,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dplayer-app.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dplayer-core.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dplayer-main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dplayer-omx_area.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dplayer-shared.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dplayer-ui.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cheviewer-app.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cheviewer-core.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cheviewer-main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cheviewer-omx_area.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cheviewer-shared.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cheviewer-ui.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -298,89 +299,89 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
-dplayer-app.o: app.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-app.o -MD -MP -MF $(DEPDIR)/dplayer-app.Tpo -c -o dplayer-app.o `test -f 'app.c' || echo '$(srcdir)/'`app.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-app.Tpo $(DEPDIR)/dplayer-app.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='app.c' object='dplayer-app.o' libtool=no @AMDEPBACKSLASH@
+cheviewer-app.o: app.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-app.o -MD -MP -MF $(DEPDIR)/cheviewer-app.Tpo -c -o cheviewer-app.o `test -f 'app.c' || echo '$(srcdir)/'`app.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-app.Tpo $(DEPDIR)/cheviewer-app.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='app.c' object='cheviewer-app.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-app.o `test -f 'app.c' || echo '$(srcdir)/'`app.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-app.o `test -f 'app.c' || echo '$(srcdir)/'`app.c
 
-dplayer-app.obj: app.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-app.obj -MD -MP -MF $(DEPDIR)/dplayer-app.Tpo -c -o dplayer-app.obj `if test -f 'app.c'; then $(CYGPATH_W) 'app.c'; else $(CYGPATH_W) '$(srcdir)/app.c'; fi`
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-app.Tpo $(DEPDIR)/dplayer-app.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='app.c' object='dplayer-app.obj' libtool=no @AMDEPBACKSLASH@
+cheviewer-app.obj: app.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-app.obj -MD -MP -MF $(DEPDIR)/cheviewer-app.Tpo -c -o cheviewer-app.obj `if test -f 'app.c'; then $(CYGPATH_W) 'app.c'; else $(CYGPATH_W) '$(srcdir)/app.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-app.Tpo $(DEPDIR)/cheviewer-app.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='app.c' object='cheviewer-app.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-app.obj `if test -f 'app.c'; then $(CYGPATH_W) 'app.c'; else $(CYGPATH_W) '$(srcdir)/app.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-app.obj `if test -f 'app.c'; then $(CYGPATH_W) 'app.c'; else $(CYGPATH_W) '$(srcdir)/app.c'; fi`
 
-dplayer-core.o: core.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-core.o -MD -MP -MF $(DEPDIR)/dplayer-core.Tpo -c -o dplayer-core.o `test -f 'core.c' || echo '$(srcdir)/'`core.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-core.Tpo $(DEPDIR)/dplayer-core.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='core.c' object='dplayer-core.o' libtool=no @AMDEPBACKSLASH@
+cheviewer-core.o: core.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-core.o -MD -MP -MF $(DEPDIR)/cheviewer-core.Tpo -c -o cheviewer-core.o `test -f 'core.c' || echo '$(srcdir)/'`core.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-core.Tpo $(DEPDIR)/cheviewer-core.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='core.c' object='cheviewer-core.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-core.o `test -f 'core.c' || echo '$(srcdir)/'`core.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-core.o `test -f 'core.c' || echo '$(srcdir)/'`core.c
 
-dplayer-core.obj: core.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-core.obj -MD -MP -MF $(DEPDIR)/dplayer-core.Tpo -c -o dplayer-core.obj `if test -f 'core.c'; then $(CYGPATH_W) 'core.c'; else $(CYGPATH_W) '$(srcdir)/core.c'; fi`
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-core.Tpo $(DEPDIR)/dplayer-core.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='core.c' object='dplayer-core.obj' libtool=no @AMDEPBACKSLASH@
+cheviewer-core.obj: core.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-core.obj -MD -MP -MF $(DEPDIR)/cheviewer-core.Tpo -c -o cheviewer-core.obj `if test -f 'core.c'; then $(CYGPATH_W) 'core.c'; else $(CYGPATH_W) '$(srcdir)/core.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-core.Tpo $(DEPDIR)/cheviewer-core.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='core.c' object='cheviewer-core.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-core.obj `if test -f 'core.c'; then $(CYGPATH_W) 'core.c'; else $(CYGPATH_W) '$(srcdir)/core.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-core.obj `if test -f 'core.c'; then $(CYGPATH_W) 'core.c'; else $(CYGPATH_W) '$(srcdir)/core.c'; fi`
 
-dplayer-main.o: main.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-main.o -MD -MP -MF $(DEPDIR)/dplayer-main.Tpo -c -o dplayer-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-main.Tpo $(DEPDIR)/dplayer-main.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main.c' object='dplayer-main.o' libtool=no @AMDEPBACKSLASH@
+cheviewer-main.o: main.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-main.o -MD -MP -MF $(DEPDIR)/cheviewer-main.Tpo -c -o cheviewer-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-main.Tpo $(DEPDIR)/cheviewer-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main.c' object='cheviewer-main.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-main.o `test -f 'main.c' || echo '$(srcdir)/'`main.c
 
-dplayer-main.obj: main.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-main.obj -MD -MP -MF $(DEPDIR)/dplayer-main.Tpo -c -o dplayer-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-main.Tpo $(DEPDIR)/dplayer-main.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main.c' object='dplayer-main.obj' libtool=no @AMDEPBACKSLASH@
+cheviewer-main.obj: main.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-main.obj -MD -MP -MF $(DEPDIR)/cheviewer-main.Tpo -c -o cheviewer-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-main.Tpo $(DEPDIR)/cheviewer-main.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='main.c' object='cheviewer-main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
 
-dplayer-ui.o: ui.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-ui.o -MD -MP -MF $(DEPDIR)/dplayer-ui.Tpo -c -o dplayer-ui.o `test -f 'ui.c' || echo '$(srcdir)/'`ui.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-ui.Tpo $(DEPDIR)/dplayer-ui.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ui.c' object='dplayer-ui.o' libtool=no @AMDEPBACKSLASH@
+cheviewer-ui.o: ui.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-ui.o -MD -MP -MF $(DEPDIR)/cheviewer-ui.Tpo -c -o cheviewer-ui.o `test -f 'ui.c' || echo '$(srcdir)/'`ui.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-ui.Tpo $(DEPDIR)/cheviewer-ui.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ui.c' object='cheviewer-ui.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-ui.o `test -f 'ui.c' || echo '$(srcdir)/'`ui.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-ui.o `test -f 'ui.c' || echo '$(srcdir)/'`ui.c
 
-dplayer-ui.obj: ui.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-ui.obj -MD -MP -MF $(DEPDIR)/dplayer-ui.Tpo -c -o dplayer-ui.obj `if test -f 'ui.c'; then $(CYGPATH_W) 'ui.c'; else $(CYGPATH_W) '$(srcdir)/ui.c'; fi`
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-ui.Tpo $(DEPDIR)/dplayer-ui.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ui.c' object='dplayer-ui.obj' libtool=no @AMDEPBACKSLASH@
+cheviewer-ui.obj: ui.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-ui.obj -MD -MP -MF $(DEPDIR)/cheviewer-ui.Tpo -c -o cheviewer-ui.obj `if test -f 'ui.c'; then $(CYGPATH_W) 'ui.c'; else $(CYGPATH_W) '$(srcdir)/ui.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-ui.Tpo $(DEPDIR)/cheviewer-ui.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='ui.c' object='cheviewer-ui.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-ui.obj `if test -f 'ui.c'; then $(CYGPATH_W) 'ui.c'; else $(CYGPATH_W) '$(srcdir)/ui.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-ui.obj `if test -f 'ui.c'; then $(CYGPATH_W) 'ui.c'; else $(CYGPATH_W) '$(srcdir)/ui.c'; fi`
 
-dplayer-shared.o: shared.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-shared.o -MD -MP -MF $(DEPDIR)/dplayer-shared.Tpo -c -o dplayer-shared.o `test -f 'shared.c' || echo '$(srcdir)/'`shared.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-shared.Tpo $(DEPDIR)/dplayer-shared.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='shared.c' object='dplayer-shared.o' libtool=no @AMDEPBACKSLASH@
+cheviewer-shared.o: shared.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-shared.o -MD -MP -MF $(DEPDIR)/cheviewer-shared.Tpo -c -o cheviewer-shared.o `test -f 'shared.c' || echo '$(srcdir)/'`shared.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-shared.Tpo $(DEPDIR)/cheviewer-shared.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='shared.c' object='cheviewer-shared.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-shared.o `test -f 'shared.c' || echo '$(srcdir)/'`shared.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-shared.o `test -f 'shared.c' || echo '$(srcdir)/'`shared.c
 
-dplayer-shared.obj: shared.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-shared.obj -MD -MP -MF $(DEPDIR)/dplayer-shared.Tpo -c -o dplayer-shared.obj `if test -f 'shared.c'; then $(CYGPATH_W) 'shared.c'; else $(CYGPATH_W) '$(srcdir)/shared.c'; fi`
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-shared.Tpo $(DEPDIR)/dplayer-shared.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='shared.c' object='dplayer-shared.obj' libtool=no @AMDEPBACKSLASH@
+cheviewer-shared.obj: shared.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-shared.obj -MD -MP -MF $(DEPDIR)/cheviewer-shared.Tpo -c -o cheviewer-shared.obj `if test -f 'shared.c'; then $(CYGPATH_W) 'shared.c'; else $(CYGPATH_W) '$(srcdir)/shared.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-shared.Tpo $(DEPDIR)/cheviewer-shared.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='shared.c' object='cheviewer-shared.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-shared.obj `if test -f 'shared.c'; then $(CYGPATH_W) 'shared.c'; else $(CYGPATH_W) '$(srcdir)/shared.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-shared.obj `if test -f 'shared.c'; then $(CYGPATH_W) 'shared.c'; else $(CYGPATH_W) '$(srcdir)/shared.c'; fi`
 
-dplayer-omx_area.o: omx_area.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-omx_area.o -MD -MP -MF $(DEPDIR)/dplayer-omx_area.Tpo -c -o dplayer-omx_area.o `test -f 'omx_area.c' || echo '$(srcdir)/'`omx_area.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-omx_area.Tpo $(DEPDIR)/dplayer-omx_area.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='omx_area.c' object='dplayer-omx_area.o' libtool=no @AMDEPBACKSLASH@
+cheviewer-omx_area.o: omx_area.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-omx_area.o -MD -MP -MF $(DEPDIR)/cheviewer-omx_area.Tpo -c -o cheviewer-omx_area.o `test -f 'omx_area.c' || echo '$(srcdir)/'`omx_area.c
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-omx_area.Tpo $(DEPDIR)/cheviewer-omx_area.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='omx_area.c' object='cheviewer-omx_area.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-omx_area.o `test -f 'omx_area.c' || echo '$(srcdir)/'`omx_area.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-omx_area.o `test -f 'omx_area.c' || echo '$(srcdir)/'`omx_area.c
 
-dplayer-omx_area.obj: omx_area.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -MT dplayer-omx_area.obj -MD -MP -MF $(DEPDIR)/dplayer-omx_area.Tpo -c -o dplayer-omx_area.obj `if test -f 'omx_area.c'; then $(CYGPATH_W) 'omx_area.c'; else $(CYGPATH_W) '$(srcdir)/omx_area.c'; fi`
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/dplayer-omx_area.Tpo $(DEPDIR)/dplayer-omx_area.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='omx_area.c' object='dplayer-omx_area.obj' libtool=no @AMDEPBACKSLASH@
+cheviewer-omx_area.obj: omx_area.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -MT cheviewer-omx_area.obj -MD -MP -MF $(DEPDIR)/cheviewer-omx_area.Tpo -c -o cheviewer-omx_area.obj `if test -f 'omx_area.c'; then $(CYGPATH_W) 'omx_area.c'; else $(CYGPATH_W) '$(srcdir)/omx_area.c'; fi`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/cheviewer-omx_area.Tpo $(DEPDIR)/cheviewer-omx_area.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='omx_area.c' object='cheviewer-omx_area.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dplayer_CFLAGS) $(CFLAGS) -c -o dplayer-omx_area.obj `if test -f 'omx_area.c'; then $(CYGPATH_W) 'omx_area.c'; else $(CYGPATH_W) '$(srcdir)/omx_area.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cheviewer_CFLAGS) $(CFLAGS) -c -o cheviewer-omx_area.obj `if test -f 'omx_area.c'; then $(CYGPATH_W) 'omx_area.c'; else $(CYGPATH_W) '$(srcdir)/omx_area.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

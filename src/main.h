@@ -4,6 +4,7 @@
 
 #include <gtk/gtk.h>
 #include <gst/gst.h>
+#include <dirent.h>
 
 #include "app.h"
 
