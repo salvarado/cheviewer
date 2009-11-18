@@ -94,12 +94,13 @@ cb_gstbus (GstBus *bus, GstMessage *message, gpointer cb_data)
         }
         case GST_MESSAGE_EOS:
         {
-            gst_element_unlink (app_data->core_data->decoder,
+            /*gst_element_unlink (app_data->core_data->decoder,
                     app_data->core_data->videocolorspace);
             gst_element_unlink (app_data->core_data->videocolorspace,
                     app_data->core_data->imagesink);
+            */
             gst_element_set_state (app_data->core_data->pipeline,
-                GST_STATE_READY);
+                    GST_STATE_READY);
         }
         case GST_MESSAGE_ELEMENT:
         {
@@ -120,6 +121,20 @@ cb_gstbus (GstBus *bus, GstMessage *message, gpointer cb_data)
                         fill_model (app_data);
 
                     }
+                }
+            }
+        }
+
+        case GST_MESSAGE_STATE_CHANGED:
+        {
+            /*Waiting for filesrc in ready state */
+            g_print("GST_STATE: %d \n",GST_ELEMENT(app_data->core_data->filesrc)->current_state);
+            if ( message->src == GST_ELEMENT(app_data->core_data->filesrc))
+            {
+                if  (GST_ELEMENT_CAST(app_data->core_data->filesrc)->current_state == 2 )
+                {
+                    app_data->shared_data->done = TRUE;
+                    g_print ("Done!\n");
                 }
             }
         }
@@ -213,23 +228,23 @@ core_data_destroy (CoreData *core_data)
 void
 core_data_open_file (CoreData *core_data, const gchar *filename)
 {
-    g_printf("\n OPEN FILE: %s\n", filename );
-
+    g_print("open file enter\n");
     g_object_set (G_OBJECT (core_data->filesrc), "location",
             filename, NULL);
-    g_printf("\n OPEN FILE  2: %s\n", filename );
-
-    gst_element_set_state (core_data->pipeline, GST_STATE_READY);
+    g_print("open file set location\n");
+    /*gst_element_set_state (core_data->pipeline, GST_STATE_READY);*/
 }
 
 int
 core_data_start_display (CoreData *core_data)
 {
+    g_print("start display enter\n");
     if (core_data->pipeline)
     {
         if (gst_element_set_state (core_data->pipeline, GST_STATE_PLAYING))
         {
             /* Success */
+            g_print("PLAYING\n");
             return 1;
         }
         else

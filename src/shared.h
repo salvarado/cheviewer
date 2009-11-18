@@ -25,6 +25,7 @@ struct SharedData_
     GArray *file_names;
     gchar * path;
     gchar *image_name;
+    gboolean   done;
 };
 
 

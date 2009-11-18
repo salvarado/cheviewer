@@ -40,21 +40,33 @@ main (int argc, char *argv[])
     */
     app_data->shared_data->path= "/data/cheviewer-0.1/images/";
 
+    app_data->shared_data->done = TRUE;
+
     create_list_dir(app_data->shared_data);
 
-    app_data->shared_data->image_name = g_array_index (app_data->shared_data->file_names, gchar *, ind_valid);
 
-    filename = app_data->shared_data->image_name;
+    while ((app_data->shared_data->done == TRUE) )//  &&
+           //(ind_valid < app_data->shared_data->index))
+    {
+        g_print("main GST_STATE: %d \n",GST_ELEMENT(app_data->core_data->filesrc)->current_state);
 
-    g_printf("\n MAIN file_name: %s : %d\n", filename,ind_valid );
+        /*Needed to create a signal and conect to a callback funtion*/
+        app_data->shared_data->done = FALSE;
 
-    chdir(app_data->shared_data->path);
+        app_data->shared_data->image_name = g_array_index (app_data->shared_data->file_names, gchar *, ind_valid);
 
-    /*filename = "DAL_93.jpg";*/
+        filename = app_data->shared_data->image_name;
 
-    core_data_open_file (app_data->core_data, filename);
+        chdir(app_data->shared_data->path);
 
-    core_data_start_display (app_data->core_data);
+        core_data_open_file (app_data->core_data, filename);
+
+        core_data_start_display (app_data->core_data);
+
+        g_print("main start display exit\n");
+
+        ind_valid ++;
+    }
 
     /*g_array_free (app_data->shared_data->file_names, TRUE);*/
 
